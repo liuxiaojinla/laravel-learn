@@ -11,6 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function(){
+	return view('welcome', [
+		'title' => '欢迎使用Laravel',
+		'tips'  => '<strong>Laravel</strong>使用与练习',
+		'jobs'  => [
+			'task1',
+			'task2',
+			'task3',
+		],
+	]);
 });
+
+Route::get('users', function(){
+	return "user list.";
+});
+
+Route::get('users/profile', function(){
+	//
+	return 'user info';
+})->name('profile');
