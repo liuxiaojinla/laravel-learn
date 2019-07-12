@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function(){
@@ -33,3 +34,7 @@ Route::get('users/profile', function(){
 	//
 	return 'user info';
 })->name('profile');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
