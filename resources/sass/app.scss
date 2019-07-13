@@ -27,3 +27,22 @@
 .app-additional .sticky-top {
 	top: 1.5rem;
 }
+
+
+@media (min-width: 768px) {
+	.input-w {
+		width: 100%;
+	}
+}
+
+@media (min-width: 992px) {
+	.input-w {
+		width: 75%;
+	}
+}
+
+@media (min-width: 1200px) {
+	.input-w {
+		width: 45%;
+	}
+}

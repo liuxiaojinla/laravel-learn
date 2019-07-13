@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
-Route::resource('/posts', 'PostsController')->only([
-	'index', 'show',
-]);
+Route::resource('/posts', 'PostsController');
 
 //Route::get('/', function(){
 //	return view('welcome', [

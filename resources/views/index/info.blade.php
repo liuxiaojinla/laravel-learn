@@ -13,6 +13,14 @@
 	</div>
 
 	<div class="card mt-4">
+		<h5 class="card-header">评论</h5>
+		<form class="card-body">
+			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+			<button type="submit" class="btn btn-primary mt-2">提交</button>
+		</form>
+	</div>
+
+	<div class="card mt-4">
 		<h5 class="card-header">评论列表</h5>
 		<div class="list-group list-group-flush">
 			@for($i=0;$i<rand(10,20);$i++)

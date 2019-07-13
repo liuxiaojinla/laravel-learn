@@ -7,10 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Post
  *
+ * @property string title
  * @package App\Models
  * @mixin \Illuminate\Database\Query\Builder
  */
 class Post extends Model{
+
+//	/**
+	//	 * 可以被批量赋值的属性。
+	//	 *
+	//	 * @var array
+	//	 */
+	//	protected $fillable = [
+	//		'title', 'keywords', 'description', 'content',
+	//	];
+
+	/**
+	 * 不被写入的字段
+	 * @var array
+	 */
+	protected $guarded = [];
 
 	/**
 	 * 关联用户信息

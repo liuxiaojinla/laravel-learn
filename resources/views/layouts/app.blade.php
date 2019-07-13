@@ -16,7 +16,8 @@
 
 	<!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	@yield('head')
+
+	@stack('head')
 </head>
 <body>
 <div id="app">
@@ -33,21 +34,21 @@
 				<div class="col-sm">
 					@yield('content')
 				</div>
-				<div class="app-additional">
-					@section('additional')
-						@include('includes.app_additional')
-					@show
-				</div>
+				@section('additional')
+				@show
+				{{--				<div class="app-additional">--}}
+				{{--					@section('additional')--}}
+				{{--						@include('includes.app_additional')--}}
+				{{--					@show--}}
+				{{--				</div>--}}
 			</div>
 		</main>
 	@show
-
 </div>
 </body>
-
 <!-- Scripts -->
 <script src="{{ asset('js/manifest.js') }}"></script>
 <script src="{{ asset('js/vendor.js') }}"></script>
-@yield('foot')
 <script src="{{ asset('js/app.js') }}"></script>
+@stack('foot')
 </html>

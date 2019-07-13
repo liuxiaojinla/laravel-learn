@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Support\Str;
 
 class HomeController extends BaseHomeController{
 

@@ -27,7 +27,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-const app = new Vue({
+// Vue.App
+window.App = Vue.extend({
 	el: '#app',
+	mounted: function() {
+		// document.body.style.background = '#fff';
+		this.$el.style.display = 'block';
+		console.log('ss')
+	}
 });

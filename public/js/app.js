@@ -773,9 +773,15 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+// Vue.App
 
-var app = new Vue({
-  el: '#app'
+window.App = Vue.extend({
+  el: '#app',
+  mounted: function mounted() {
+    // document.body.style.background = '#fff';
+    this.$el.style.display = 'block';
+    console.log('ss');
+  }
 });
 
 /***/ }),
@@ -800,6 +806,23 @@ try {
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 } catch (e) {}
+
+window.editor = function (el) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return tinymce.init($.extend({
+    selector: el,
+    height: 500,
+    menubar: false,
+    plugins: ['advlist autolink lists link image charmap print preview anchor textcolor', 'searchreplace visualblocks code fullscreen', 'insertdatetime media table paste code help wordcount'],
+    toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+    language: 'zh_CN' //语言包的路径
+    // content_css: [
+    // 	'//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+    // 	'//www.tiny.cloud/css/codepen.min.css'
+    // ]
+
+  }, options));
+};
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

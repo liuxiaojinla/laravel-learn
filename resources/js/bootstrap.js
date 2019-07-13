@@ -13,6 +13,25 @@ try {
 } catch (e) {
 }
 
+window.editor = function(el, options = {}) {
+	return tinymce.init($.extend({
+		selector: el,
+		height: 500,
+		menubar: false,
+		plugins: [
+			'advlist autolink lists link image charmap print preview anchor textcolor',
+			'searchreplace visualblocks code fullscreen',
+			'insertdatetime media table paste code help wordcount'
+		],
+		toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+		language: 'zh_CN',//语言包的路径
+		// content_css: [
+		// 	'//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+		// 	'//www.tiny.cloud/css/codepen.min.css'
+		// ]
+	}, options));
+};
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

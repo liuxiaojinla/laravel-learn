@@ -8,9 +8,9 @@
 	</ol>
 	<div class="carousel-inner">
 		@foreach ($data as $item)
-		<div class="carousel-item {{ $loop->first?'active':'' }}">
-			<img class="d-block w-100" src="{{ $item }}">
-		</div>
+			<div class="carousel-item {{ $loop->first?'active':'' }}">
+				<img class="d-block w-100" src="{{ $item }}">
+			</div>
 		@endforeach
 	</div>
 	<a class="carousel-control-prev" href="#{{ $id }}" role="button" data-slide="prev">

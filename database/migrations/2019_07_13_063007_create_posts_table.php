@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration{
 			$table->string('title', 48);
 			$table->string('keywords', 48);
 			$table->string('description', 128);
+			$table->tinyInteger('status', 4);
 			$table->integer('good_count', 11)->unsigned();
 			$table->integer('praise_count', 11)->unsigned();
 			$table->integer('comment_count', 11)->unsigned();
