@@ -8,11 +8,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class UsersController extends Controller{
+class UsersController extends BaseApiController{
 
 	/**
 	 * 用户列表

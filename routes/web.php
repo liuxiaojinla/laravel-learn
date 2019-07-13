@@ -14,17 +14,17 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
-	return view('welcome', [
-		'title' => '欢迎使用Laravel',
-		'tips'  => '<strong>Laravel</strong>使用与练习',
-		'jobs'  => [
-			'task1',
-			'task2',
-			'task3',
-		],
-	]);
-});
-
+Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/', function(){
+//	return view('welcome', [
+//		'title' => '欢迎使用Laravel',
+//		'tips'  => '<strong>Laravel</strong>使用与练习',
+//		'jobs'  => [
+//			'task1',
+//			'task2',
+//			'task3',
+//		],
+//	]);
+//});

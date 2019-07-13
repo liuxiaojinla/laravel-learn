@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 
 class InitView{
 
@@ -15,6 +16,8 @@ class InitView{
 	 * @return mixed
 	 */
 	public function handle($request, Closure $next){
+		$this->initVariable();
+
 		$this->initBlade();
 
 		$this->initPaginator();
@@ -73,6 +76,19 @@ class InitView{
 	private function initPaginator(){
 		//		Paginator::defaultView('view-name');
 		//		Paginator::defaultSimpleView('view-name');
+	}
+
+	/**
+	 * 初始化模板公用变量
+	 */
+	private function initVariable(){
+		View::share([
+			'_META' => [
+				'title'       => '',
+				'description' => '',
+				'keywords'    => '',
+			],
+		]);
 	}
 
 }
