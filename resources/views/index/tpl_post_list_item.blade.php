@@ -1,5 +1,7 @@
 <div class="card my-4">
-	<div class="card-header">{{ $item->title }}</div>
+	<div class="card-header">
+		<a href="{{ url("/posts/{$item->id}") }}">{{ $item->title }}</a>
+	</div>
 	<div class="card-body">
 		{{ $item->description }}
 	</div>
