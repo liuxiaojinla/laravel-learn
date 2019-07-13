@@ -31,4 +31,16 @@ trait FrontPage{
 
 		return $this;
 	}
+
+	/**
+	 * 编译视图模板
+	 *
+	 * @param string $view
+	 * @param array  $data
+	 * @param array  $mergeData
+	 * @return \Illuminate\Contracts\View\View
+	 */
+	protected function fetch($view = null, $data = [], $mergeData = []){
+		return View::make($view, $data, $mergeData);
+	}
 }

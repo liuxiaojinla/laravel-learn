@@ -19,6 +19,7 @@ class HomeController extends BaseHomeController{
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
 	public function index(){
-		return view('home');
+		return $this->setMeta('首页')->fetch('home');
+//		return view('home');
 	}
 }
