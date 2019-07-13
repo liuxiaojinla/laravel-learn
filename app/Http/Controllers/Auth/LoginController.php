@@ -18,7 +18,9 @@ class LoginController extends BaseHomeController{
 	|
 	*/
 
-	use AuthenticatesUsers;
+	use AuthenticatesUsers {
+		showLoginForm as protected _showLoginForm;
+	}
 
 	/**
 	 * Where to redirect users after login.
@@ -34,6 +36,10 @@ class LoginController extends BaseHomeController{
 	 */
 	public function __construct(){
 		$this->middleware('guest')->except('logout');
+	}
+
+	public function showLoginForm(){
 		$this->setMeta('登录');
+		return $this->_showLoginForm();
 	}
 }

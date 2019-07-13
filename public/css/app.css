@@ -9718,7 +9718,24 @@ h3 {
     border-color: #dee2e6;
   }
 }
-.app-aside {
+.app-aside, .app-additional {
+  flex-shrink: 0;
   flex-grow: 0;
+}
+.app-aside .app-block, .app-additional .app-block {
+  background-color: white;
+  margin-bottom: 15px;
+}
+
+.app-aside {
   flex-basis: 220px;
+}
+
+.app-additional {
+  flex-basis: 280px;
+}
+
+.app-aside .sticky-top,
+.app-additional .sticky-top {
+  top: 1.5rem;
 }

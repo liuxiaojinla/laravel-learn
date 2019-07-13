@@ -5,8 +5,25 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+.app-aside, .app-additional {
+	flex-shrink: 0;
+	flex-grow: 0;
+
+	.app-block {
+		background-color: white;
+		margin-bottom: 15px;
+	}
+}
 
 .app-aside {
-	flex-grow: 0;
 	flex-basis: 220px;
+}
+
+.app-additional {
+	flex-basis: 280px;
+}
+
+.app-aside .sticky-top,
+.app-additional .sticky-top {
+	top: 1.5rem;
 }

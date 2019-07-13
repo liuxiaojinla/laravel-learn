@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+
 class HomeController extends BaseHomeController{
 
 	/**
@@ -10,7 +12,7 @@ class HomeController extends BaseHomeController{
 	 * @return void
 	 */
 	public function __construct(){
-		$this->middleware('auth');
+		//		$this->middleware('auth');
 	}
 
 	/**
@@ -19,7 +21,10 @@ class HomeController extends BaseHomeController{
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
 	public function index(){
-		return $this->setMeta('首页')->fetch('home');
-//		return view('home');
+		$data = Post::latest()->paginate(15);
+		return $this->setMeta('首页')->fetch('index.index', [
+			'data' => $data,
+		]);
+		//		return view('home');
 	}
 }

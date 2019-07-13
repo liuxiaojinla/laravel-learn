@@ -25,13 +25,18 @@
 	@section('container')
 		<main class="container py-4">
 			<div class="row">
-				<div class="col-sm app-aside">
+				<div class="app-aside">
 					@section('aside')
 						@include('includes.app_aside')
 					@show
 				</div>
 				<div class="col-sm">
 					@yield('content')
+				</div>
+				<div class="app-additional">
+					@section('additional')
+						@include('includes.app_aside')
+					@show
 				</div>
 			</div>
 		</main>
