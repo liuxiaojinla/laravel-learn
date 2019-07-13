@@ -9718,3 +9718,7 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.app-aside {
+  flex-grow: 0;
+  flex-basis: 220px;
+}

@@ -2,82 +2,89 @@
 
 @section('title',$title)
 
+@section('head')
+	<style>
+
+	</style>
+@endsection
+
 @section('content')
-	@panel
+
+	@component('components.panel')
 		@slot('title')
 			基本示例
 		@endslot
 		<p>此处取域是内容信息</p>
-	@endpanel
-
-	@panel
-	@slot('title')
-		定义组件
-	@endslot
-	@component('components.alert',['size'=>'large','scene'=>'info'])
-		@slot('title')
-			Hello world
-		@endslot
-		{!! $tips !!}
 	@endcomponent
-	@endpanel
 
-	@panel
-	@slot('title')
-		定义组件别名
-	@endslot
-	@alert(['scene'=>'warning'])
-	这个警告提示的框
-	@endalert
-	@endpanel
+	@component('components.panel',['class'=>'my-4'])
+		@slot('title')
+			定义组件
+		@endslot
+		@component('components.alert',['size'=>'large','scene'=>'info'])
+			@slot('title')
+				Hello world
+			@endslot
+			{!! $tips !!}
+		@endcomponent
+	@endcomponent
 
-	@panel
-	@slot('title')
-		禁用双重编码
-	@endslot
-	@{{ name }}.
+	@component('components.panel',['class'=>'my-4'])
+		@slot('title')
+			定义组件别名
+		@endslot
+		@component('components.alert',['scene'=>'warning'])
+			这个警告提示的框
+		@endcomponent
+	@endcomponent
 
-	@verbatim
-		<div class="container">
-			Hello, {{ name }}.
-		</div>
-	@endverbatim
-	@endpanel
+	@component('components.panel',['class'=>'my-4'])
+		@slot('title')
+			禁用双重编码
+		@endslot
+		<span v-pre>@{{ name }}.</span>
 
-	@panel
-	@slot('title')
-		包含文件
-	@endslot
-	@input(['type'=>'email'])
+		@verbatim
+			<div class="container" v-pre>
+				Hello, {{ name }}.
+			</div>
+		@endverbatim
+	@endcomponent
 
-	@each('includes.each_item',$jobs,'job','includes.each_empty')
-	@endpanel
+	@component('components.panel',['class'=>'my-4'])
+		@slot('title')
+			包含文件
+		@endslot
+		@input(['type'=>'email'])
 
-	@panel
-	@slot('title')
-		自定义指令
-	@endslot
-	@datetime(now());
-	@endpanel
+		@each('includes.each_item',$jobs,'job','includes.each_empty')
+	@endcomponent
 
-	@panel
-	@slot('title')
-		本地化
-	@endslot
+	@component('components.panel',['class'=>'my-4'])
+		@slot('title')
+			自定义指令
+		@endslot
+		@datetime(now());
+	@endcomponent
 
-	@env('local')
-	// 应用在本地环境中运行...
-	@elseenv('testing')
-	// 应用在测试环境中运行...
-	@else
-		// 应用没有在本地和测试环境中运行...
-	@endenv
+	@component('components.panel',['class'=>'my-4'])
+		@slot('title')
+			本地化
+		@endslot
 
-	{{ __('common.welcome') }}
+		@env('local')
+		// 应用在本地环境中运行...
+		@elseenv('testing')
+		// 应用在测试环境中运行...
+		@else
+			// 应用没有在本地和测试环境中运行...
+			@endenv
 
-	@lang('hello world')
+			{{ __('common.welcome') }}
 
-	@endpanel
+			@lang('hello world')
+
+			@endcomponent
 @endsection
 
 @push('foot')

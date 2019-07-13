@@ -1,11 +1,13 @@
-<div class="card">
+<div class="card {{$class ?? ''}}">
 	@isset($title)
-		<div class="card-header">{{ $title }}</div>
+		<div class="card-header {{$headerClass ?? ''}}">{{ $title }}</div>
 	@endisset
 
-	{!! $slot !!}
+	<div class="card-body {{$bodyClass ?? ''}}">
+		{!! $slot !!}
+	</div>
 
 	@isset($footer)
-		<div class="card-footer">{!! $footer !!}</div>
+		<div class="card-footer {{$footerClass ?? ''}}">{!! $footer !!}</div>
 	@endisset
 </div>

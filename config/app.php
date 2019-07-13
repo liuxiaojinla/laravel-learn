@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'name' => env('APP_NAME', 'Laravel'),
+	'name' => env('APP_NAME', '刘小晋啦的博客'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -174,8 +174,6 @@ return [
 		App\Providers\BroadcastServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
-		App\Providers\ApiUserServiceProvider::class,
-		App\Providers\ViewServiceProvider::class,
 	],
 
 	/*

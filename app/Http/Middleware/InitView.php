@@ -1,38 +1,31 @@
 <?php
 
-namespace App\Providers;
+namespace App\Http\Middleware;
 
-use Illuminate\Contracts\View\Factory as ViewFactory;
+use Closure;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\ServiceProvider;
 
-class ViewServiceProvider extends ServiceProvider{
+class InitView{
 
 	/**
-	 * 获取由提供者提供的服务。
+	 * Handle an incoming request.
 	 *
-	 * @return array
+	 * @param \Illuminate\Http\Request $request
+	 * @param \Closure                 $next
+	 * @return mixed
 	 */
-	public function provides(){
-		var_dump(ViewFactory::class);
-		return [ViewFactory::class];
+	public function handle($request, Closure $next){
+		$this->initBlade();
+
+		$this->initPaginator();
+
+		return $next($request);
 	}
 
 	/**
-	 * Register services.
-	 *
-	 * @return void
+	 * 初始化视图
 	 */
-	public function register(){
-		//
-	}
-
-	/**
-	 * Bootstrap services.
-	 *
-	 * @return void
-	 */
-	public function boot(){
+	private function initBlade(){
 		// 注册组件别名
 		$this->registerBladeComponentsAlias();
 
@@ -69,9 +62,17 @@ class ViewServiceProvider extends ServiceProvider{
 			return "<?php echo ($expression)->format('m/d/Y H:i'); ?>";
 		});
 
-		Blade::if('env', function ($environment) {
+		Blade::if('env', function($environment){
 			return app()->environment($environment);
 		});
+	}
+
+	/**
+	 * 初始化分页器模板
+	 */
+	private function initPaginator(){
+		//		Paginator::defaultView('view-name');
+		//		Paginator::defaultSimpleView('view-name');
 	}
 
 }
