@@ -9724,7 +9724,7 @@ h3 {
 }
 .app-aside .app-block, .app-additional .app-block {
   background-color: white;
-  margin-bottom: 15px;
+  margin-bottom: 1rem !important;
 }
 
 .app-aside {

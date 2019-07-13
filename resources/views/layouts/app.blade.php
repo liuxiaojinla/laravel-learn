@@ -35,7 +35,7 @@
 				</div>
 				<div class="app-additional">
 					@section('additional')
-						@include('includes.app_aside')
+						@include('includes.app_additional')
 					@show
 				</div>
 			</div>
