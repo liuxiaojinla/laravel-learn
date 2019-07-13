@@ -15,8 +15,8 @@ class UsersTableSeeder extends Seeder{
 		//			'email'    => Str::random(10).'@gmail.com',
 		//			'password' => bcrypt('secret'),
 		//		]);
-		factory(App\User::class, 50)->create()->each(function($u){
-			$u->posts()->save(factory(App\Post::class)->make());
+		factory(App\Models\User::class, 50)->create()->each(function($u){
+			$u->posts()->save(factory(App\Models\Post::class)->make());
 		});
 	}
 }
