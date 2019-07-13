@@ -35,4 +35,11 @@ class User extends Authenticatable{
 	protected $casts = [
 		'email_verified_at' => 'datetime',
 	];
+
+	/**
+	 * 获取博客文章
+	 */
+	public function posts(){
+		return $this->hasMany('App\Post', 'uid');
+	}
 }
