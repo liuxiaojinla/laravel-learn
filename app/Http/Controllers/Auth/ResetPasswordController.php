@@ -34,5 +34,6 @@ class ResetPasswordController extends BaseHomeController{
 	 */
 	public function __construct(){
 		$this->middleware('guest');
+		$this->setMeta('重置密码');
 	}
 }

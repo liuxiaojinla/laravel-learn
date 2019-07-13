@@ -83,11 +83,9 @@ class InitView{
 	 */
 	private function initVariable(){
 		View::share([
-			'_META' => [
-				'title'       => '',
-				'description' => '',
-				'keywords'    => '',
-			],
+			//			'_meta_title'       => '',
+			//			'_meta_description' => '',
+			//			'_meta_keywords'    => '',
 		]);
 	}
 

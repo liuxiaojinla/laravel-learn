@@ -27,5 +27,6 @@ class ForgotPasswordController extends BaseHomeController{
 	 */
 	public function __construct(){
 		$this->middleware('guest');
+		$this->setMeta('忘记密码');
 	}
 }

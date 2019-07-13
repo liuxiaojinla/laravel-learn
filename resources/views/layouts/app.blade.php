@@ -6,9 +6,9 @@
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>{{ config('app.name') }} - {{ $_META['title'] ?? '' }}</title>
-	<meta name="keywords" content="{{ $_META['keywords'] ?? '' }}">
-	<meta name="description" content="{{ $_META['description'] ?? '' }}">
+	<title>{{ config('app.name') }} - {{ $_meta_title ?? '' }}</title>
+	<meta name="keywords" content="{{ $_meta_keywords ?? '' }}">
+	<meta name="description" content="{{ $_meta_description ?? '' }}">
 
 	<!-- Fonts -->
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">

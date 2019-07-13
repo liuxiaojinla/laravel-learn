@@ -37,6 +37,7 @@ class RegisterController extends BaseHomeController{
 	 */
 	public function __construct(){
 		$this->middleware('guest');
+		$this->setMeta('注册');
 	}
 
 	/**

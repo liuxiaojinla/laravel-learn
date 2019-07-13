@@ -34,5 +34,6 @@ class LoginController extends BaseHomeController{
 	 */
 	public function __construct(){
 		$this->middleware('guest')->except('logout');
+		$this->setMeta('登录');
 	}
 }

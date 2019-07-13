@@ -22,11 +22,9 @@ trait FrontPage{
 	 */
 	protected function setMeta($title, $description = null, $keywords = null){
 		View::share([
-			'_META' => [
-				'title'       => $title,
-				'description' => $description,
-				'keywords'    => $keywords,
-			],
+			'_meta_title'       => $title,
+			'_meta_description' => $description,
+			'_meta_keywords'    => $keywords,
 		]);
 
 		return $this;
