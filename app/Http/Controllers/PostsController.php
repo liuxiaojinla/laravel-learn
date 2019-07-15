@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class PostsController extends BaseHomeController{
 
@@ -32,6 +34,7 @@ class PostsController extends BaseHomeController{
 	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function create(){
+		$this->assignCategorys();
 		return $this->setMeta('发布文章')->fetch('posts.edit');
 	}
 
@@ -46,8 +49,12 @@ class PostsController extends BaseHomeController{
 			'title'       => 'required|unique:posts|max:255',
 			'description' => 'required|min:15|max:128',
 			'content'     => 'required',
+			'category_id' => 'required|exists:categories,id',
 		]);
 		$data['uid'] = 1;
+		$request->has('view_count') && $data['view_count'] = intval($request->input('view_count'));
+		$request->has('praise_count') && $data['praise_count'] = intval($request->input('praise_count'));
+		$request->has('comment_count') && $data['view_count'] = intval($request->input('comment_count'));
 
 		Post::create($data);
 		return redirect()->route('home');
@@ -87,5 +94,13 @@ class PostsController extends BaseHomeController{
 	 */
 	public function destroy($id){
 		//
+	}
+
+	/**
+	 * 赋值分类列表
+	 */
+	private function assignCategorys(){
+		$data = Category::where('status', 1)->select('id', 'pid', 'title')->get();
+		View::share('categorys', $data);
 	}
 }

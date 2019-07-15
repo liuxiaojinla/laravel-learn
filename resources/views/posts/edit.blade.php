@@ -26,6 +26,15 @@
 				</div>
 
 				<div class="form-group">
+					<label for="category_id">所属分类</label>
+					<select class="form-control" id="category_id" name="category_id">
+						@foreach($categorys as $category)
+							<option value="{{ $category->id }}">{{ $category->title }}</option>
+						@endforeach
+					</select>
+				</div>
+
+				<div class="form-group">
 					<label for="description">描述</label>
 					<textarea id="description" name="description" class="form-control" placeholder="请输入描述" rows="3" maxlength="128"></textarea>
 				</div>
