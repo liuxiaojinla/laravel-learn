@@ -11,16 +11,19 @@ class PostsController extends BaseHomeController{
 	 * PostsController constructor.
 	 */
 	public function __construct(){
-		//		$this->middleware('auth')->except('index');
+		$this->middleware('auth')->except('index');
 	}
 
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function index(){
-		//
+		$data = Post::latest()->paginate(15);
+		return $this->setMeta('首页')->fetch('index.index', [
+			'data' => $data,
+		]);
 	}
 
 	/**
@@ -41,11 +44,11 @@ class PostsController extends BaseHomeController{
 	public function store(Request $request){
 		$data = $request->validate([
 			'title'       => 'required|unique:posts|max:255',
-			'keywords'    => 'required|min:3|max:48',
 			'description' => 'required|min:15|max:128',
 			'content'     => 'required',
 		]);
 		$data['uid'] = 1;
+
 		Post::create($data);
 		return redirect()->route('home');
 	}

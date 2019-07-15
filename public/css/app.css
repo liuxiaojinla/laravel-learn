@@ -9730,19 +9730,22 @@ h3 {
   border-top: 1px solid rgba(0, 0, 0, 0.0125);
 }
 
-@media (min-width: 768px) {
-  .input-w {
-    width: 100%;
-  }
-}
 @media (min-width: 992px) {
   .input-w {
     width: 75%;
+  }
+
+  .input-sw {
+    width: 50%;
   }
 }
 @media (min-width: 1200px) {
   .input-w {
     width: 45%;
+  }
+
+  .input-sw {
+    width: 25%;
   }
 }
 .app-aside, .app-additional {

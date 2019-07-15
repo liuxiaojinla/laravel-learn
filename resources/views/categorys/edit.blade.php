@@ -13,9 +13,9 @@
 			</div>
 		@endif
 
-		<form class="card" method="post" action="{{ route('posts.store') }}">
+		<form class="card" method="post" action="{{ route('categorys.store') }}">
 			<div class="card-body">
-				<h4 class="card-title">发布文章</h4>
+				<h4 class="card-title">创建分类</h4>
 
 				@csrf
 
@@ -26,13 +26,14 @@
 				</div>
 
 				<div class="form-group">
-					<label for="description">描述</label>
-					<textarea id="description" name="description" class="form-control" placeholder="请输入描述" rows="3" maxlength="128"></textarea>
+					<label for="keywords">网页关键字</label>
+					<input id="keywords" type="text" name="keywords" class="form-control input-w" placeholder="请输入关键字" maxlength="48"/>
+					<small class="form-text text-muted">不少于3个字符和不多于48个字符</small>
 				</div>
 
 				<div class="form-group">
-					<label for="content">正文</label>
-					<textarea id="content" name="content" class="form-control" placeholder="请输入描述" rows="4"></textarea>
+					<label for="description">网页描述</label>
+					<textarea id="description" name="description" class="form-control" placeholder="请输入描述" rows="3" maxlength="128"></textarea>
 				</div>
 
 				<div class="form-group">
@@ -51,25 +52,7 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label for="view_count">浏览数</label>
-					<input id="view_count" type="number" name="view_count" class="form-control input-sw"/>
-					<small class="form-text text-muted"></small>
-				</div>
-
-				<div class="form-group">
-					<label for="praise_count">点赞数</label>
-					<input id="praise_count" type="number" name="praise_count" class="form-control input-sw"/>
-					<small class="form-text text-muted"></small>
-				</div>
-
-				<div class="form-group">
-					<label for="comment_count">评论数</label>
-					<input id="comment_count" type="number" name="comment_count" class="form-control input-sw"/>
-					<small class="form-text text-muted"></small>
-				</div>
-
-				<button type="submit" class="btn btn-primary btn-lg" style="width: 200px">发布</button>
+				<button type="submit" class="btn btn-primary btn-lg" style="width: 200px">创建</button>
 			</div>
 		</form>
 	</div>
