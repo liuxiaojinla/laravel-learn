@@ -17,16 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
-Route::resource('/posts', 'PostsController');
+Route::resource('posts', 'PostsController');
 
-//Route::get('/', function(){
-//	return view('welcome', [
-//		'title' => '欢迎使用Laravel',
-//		'tips'  => '<strong>Laravel</strong>使用与练习',
-//		'jobs'  => [
-//			'task1',
-//			'task2',
-//			'task3',
-//		],
-//	]);
-//});
+Route::prefix('manager')
+	->name('manager.')
+	->namespace('\App\Http\Controllers\Managers')
+	->group(function(){
+		Route::resource('categorys', 'CategorysController');
+	});

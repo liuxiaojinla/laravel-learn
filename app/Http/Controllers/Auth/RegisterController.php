@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\BaseHomeController;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,7 +29,7 @@ class RegisterController extends BaseHomeController{
 	 *
 	 * @var string
 	 */
-	protected $redirectTo = '/home';
+	protected $redirectTo = '/';
 
 	/**
 	 * Create a new controller instance.
@@ -61,6 +62,7 @@ class RegisterController extends BaseHomeController{
 	 * @return \App\Models\User
 	 */
 	protected function create(array $data){
+		Auth::user();
 		return User::create([
 			'name'     => $data['name'],
 			'email'    => $data['email'],

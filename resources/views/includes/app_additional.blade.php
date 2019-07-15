@@ -13,7 +13,7 @@
 		<img class="card-img-top" src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1563002835&di=96d671ad3f1d972994a31e1336c59864&src=http://img4.duitang.com/uploads/blog/201405/05/20140505184427_kF4dM.jpeg" alt="Card image cap">
 		<div class="card-body">
 			<h5 class="card-title">魅力郑州，共筑百万居民梦想</h5>
-			<p class="card-text">即日起凡参加“魅力郑州”的参与者，即可有机会得到有河南郑州人们政府送出随机抽奖的机会</p>
+			<p class="card-text">即日起凡参加 “魅力郑州” 的参与者，即可有机会得到有河南郑州人们政府送出随机抽奖的机会</p>
 			<a href="#" class="btn btn-primary">马上报名</a>
 		</div>
 	</div>
@@ -31,7 +31,7 @@
 
 	<div class="card mb-3">
 		<div class="card-header">相关链接</div>
-		<ul class="nav flex-column app-block">
+		<ul class="nav flex-column">
 			<li class="nav-item">
 				<a class="nav-link" href="#">iView3.0北京发布演讲会</a>
 			</li>

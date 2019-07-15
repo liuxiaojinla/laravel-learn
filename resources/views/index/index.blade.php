@@ -16,17 +16,10 @@
 
 @endsection
 
-@section('additional')
-	<div class="app-additional">
-		@include('includes.app_additional')
-	</div>
-@endsection
-
 @push('foot')
 	<script>
 	new App({
 		mounted: function() {
-			console.log(this.$el)
 			$(function() {
 				$('.carousel').carousel();
 			});

@@ -23,27 +23,34 @@
 <div id="app">
 	@include('includes.app_header')
 
-	@section('container')
-		<main class="container py-4">
+	<main class="container py-4">
+		@section('container')
 			<div class="row">
-				<div class="app-aside">
-					@section('aside')
-						@include('includes.app_aside')
-					@show
-				</div>
+
+				@section('aside-container')
+					<div class="app-aside">
+						@section('aside')
+							@include('includes.app_aside')
+						@show
+					</div>
+				@show
+
 				<div class="col-sm">
 					@yield('content')
 				</div>
-				@section('additional')
+
+				@section('additional-container')
+					<div class="app-additional">
+						@section('additional')
+							@include('includes.app_additional')
+						@show
+					</div>
 				@show
-				{{--				<div class="app-additional">--}}
-				{{--					@section('additional')--}}
-				{{--						@include('includes.app_additional')--}}
-				{{--					@show--}}
-				{{--				</div>--}}
+
 			</div>
-		</main>
-	@show
+		@show
+	</main>
+
 </div>
 </body>
 <!-- Scripts -->

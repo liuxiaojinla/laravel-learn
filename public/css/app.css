@@ -1512,14 +1512,14 @@ pre code {
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #f8f9fa;
 }
 .table thead th {
   vertical-align: bottom;
-  border-bottom: 2px solid #dee2e6;
+  border-bottom: 2px solid #f8f9fa;
 }
 .table tbody + tbody {
-  border-top: 2px solid #dee2e6;
+  border-top: 2px solid #f8f9fa;
 }
 
 .table-sm th,
@@ -1528,11 +1528,11 @@ pre code {
 }
 
 .table-bordered {
-  border: 1px solid #dee2e6;
+  border: 1px solid #f8f9fa;
 }
 .table-bordered th,
 .table-bordered td {
-  border: 1px solid #dee2e6;
+  border: 1px solid #f8f9fa;
 }
 .table-bordered thead th,
 .table-bordered thead td {
@@ -1737,7 +1737,7 @@ pre code {
 .table .thead-light th {
   color: #495057;
   background-color: #e9ecef;
-  border-color: #dee2e6;
+  border-color: #f8f9fa;
 }
 
 .table-dark {
@@ -5245,7 +5245,7 @@ a.close.disabled {
   align-items: flex-start;
   justify-content: space-between;
   padding: 1rem 1rem;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #f8f9fa;
   border-top-left-radius: 0.3rem;
   border-top-right-radius: 0.3rem;
 }
@@ -5270,7 +5270,7 @@ a.close.disabled {
   align-items: center;
   justify-content: flex-end;
   padding: 1rem;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #f8f9fa;
   border-bottom-right-radius: 0.3rem;
   border-bottom-left-radius: 0.3rem;
 }
@@ -5924,23 +5924,23 @@ button.bg-dark:focus {
 }
 
 .border {
-  border: 1px solid #dee2e6 !important;
+  border: 1px solid #f8f9fa !important;
 }
 
 .border-top {
-  border-top: 1px solid #dee2e6 !important;
+  border-top: 1px solid #f8f9fa !important;
 }
 
 .border-right {
-  border-right: 1px solid #dee2e6 !important;
+  border-right: 1px solid #f8f9fa !important;
 }
 
 .border-bottom {
-  border-bottom: 1px solid #dee2e6 !important;
+  border-bottom: 1px solid #f8f9fa !important;
 }
 
 .border-left {
-  border-left: 1px solid #dee2e6 !important;
+  border-left: 1px solid #f8f9fa !important;
 }
 
 .border-0 {
@@ -9710,34 +9710,24 @@ h3 {
 .table-dark td,
 .table-dark thead th,
 .table-dark tbody + tbody {
-    border-color: #dee2e6;
+    border-color: #f8f9fa;
   }
 
   .table .thead-dark th {
     color: inherit;
-    border-color: #dee2e6;
+    border-color: #f8f9fa;
   }
 }
-.app-aside, .app-additional {
-  flex-shrink: 0;
-  flex-grow: 0;
-}
-.app-aside .app-block, .app-additional .app-block {
+.card {
   background-color: white;
-  margin-bottom: 1rem !important;
+  border: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
-
-.app-aside {
-  flex-basis: 220px;
+.card .card-header {
+  background-color: rgba(0, 0, 0, 0.005);
 }
-
-.app-additional {
-  flex-basis: 280px;
-}
-
-.app-aside .sticky-top,
-.app-additional .sticky-top {
-  top: 1.5rem;
+.card .card-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.0125);
 }
 
 @media (min-width: 768px) {
@@ -9754,4 +9744,31 @@ h3 {
   .input-w {
     width: 45%;
   }
+}
+.app-aside, .app-additional {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+.app-aside .app-block, .app-additional .app-block {
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1rem !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.app-aside {
+  flex-basis: 220px;
+}
+.app-aside .nav-pills .nav-link {
+  border-radius: 0;
+}
+
+.app-additional {
+  flex-basis: 280px;
+}
+
+.app-aside .sticky-top, .app-additional .sticky-top {
+  top: 1.5rem;
+}
+.app-aside .card, .app-additional .card {
+  background-color: rgba(255, 255, 255, 0.8);
 }

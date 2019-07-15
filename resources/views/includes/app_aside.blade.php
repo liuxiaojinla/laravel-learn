@@ -20,7 +20,7 @@
 
 	<div class="card mb-3">
 		<div class="card-header">经验分享</div>
-		<ul class="nav flex-column nav-pills app-block">
+		<ul class="nav flex-column nav-pills">
 			<li class="nav-item">
 				<a class="nav-link" href="#">Vue</a>
 			</li>
@@ -41,7 +41,7 @@
 
 	<div class="card mb-3">
 		<div class="card-header">开源推荐</div>
-		<ul class="nav flex-column nav-pills app-block">
+		<ul class="nav flex-column nav-pills">
 			<li class="nav-item">
 				<a class="nav-link" href="#">前端</a>
 			</li>

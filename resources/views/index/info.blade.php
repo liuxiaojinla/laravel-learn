@@ -8,8 +8,19 @@
 				<small class="text-muted"> 发表于 {{ $info->created_at }}</small>
 			</p>
 			<p class="blockquote-footer">{{ $info->description }}</p>
-			<div class="card-text">{{ $info->content }}</div>
+			<div class="card-text">{!! $info->content !!}</div>
 		</div>
+		<ul class="nav">
+			<li class="nav-item">
+				<a class="nav-link" href="javascript:void(0)">点赞({{ $info->praise_count }})</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="javascript:void(0)">浏览({{ $info->view_count }})</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="javascript:void(0)">评论({{ $info->comment_count }})</a>
+			</li>
+		</ul>
 	</div>
 
 	<div class="card mt-4">
@@ -36,3 +47,5 @@
 		</div>
 	</div>
 @endsection
+
+@section('additional-container','')
