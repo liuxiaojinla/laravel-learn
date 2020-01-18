@@ -44,6 +44,6 @@ class User extends Authenticatable{
 	 * 获取博客文章
 	 */
 	public function posts(){
-		return $this->hasMany('App\Post', 'uid');
+		return $this->hasMany('App\Models\Post', 'uid');
 	}
 }

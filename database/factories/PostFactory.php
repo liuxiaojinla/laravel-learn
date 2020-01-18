@@ -16,10 +16,15 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(Post::class, function(Faker $faker){
-	return [
-		'title'       => $faker->name,
-		'description' => $faker->name,
-		'keywords'    => $faker->name(),
-		'content'     => $faker->text(1024),
-	];
+    return [
+        'title'         => $faker->name,
+        'description'   => $faker->name,
+        'category_id'   => rand(1, 10),
+        //		'keywords'    => $faker->name(),
+        'content'       => $faker->text(1024),
+        'status'        => 1,
+        'view_count'    => 0,
+        'comment_count' => 0,
+        'praise_count'  => 0,
+    ];
 });
