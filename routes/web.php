@@ -15,13 +15,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PostsController@index')->name('home');
+
 Auth::routes();
 
-Route::resource('posts', 'PostsController');
+// 博客文章
+Route::get('posts', 'PostsController@index');
+Route::get('posts/{id}', 'PostsController@show');
 
-Route::prefix('manager')
-	->name('manager.')
-	->namespace('\App\Http\Controllers\Managers')
-	->group(function(){
-		Route::resource('categorys', 'CategorysController');
-	});
+// 博客分类
+
+// 个人中心
+Route::name('user.')
+    ->prefix('user')
+    //    ->namespace('\App\Http\Controllers\User')
+    //    ->group(base_path('routes/web/user.php'))
+    ->group(function(){
+        Route::get('index', 'UserController@show');
+        Route::get('collect/categories', 'CategoryController@myCollect');
+        Route::get('collect/posts', 'PostController@myCollect');
+    });

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 class Kernel extends HttpKernel{
 
     /**
+     * 指定全局路由
      * The application's global HTTP middleware stack.
      * These middleware are run during every request to your application.
      *
@@ -27,7 +28,7 @@ class Kernel extends HttpKernel{
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Http\Middleware\InitView::class,
+            \App\Http\Middleware\ViewInit::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -44,6 +45,7 @@ class Kernel extends HttpKernel{
     ];
 
     /**
+     * 分配中间件到指定路由
      * The application's route middleware.
      * These middleware may be assigned to groups or used individually.
      *
@@ -62,13 +64,13 @@ class Kernel extends HttpKernel{
     ];
 
     /**
+     * 中间件排序
      * The priority-sorted list of middleware.
      * This forces non-global middleware to always be in the given order.
      *
      * @var array
      */
     protected $middlewarePriority = [
-        \App\Http\Middleware\InitView::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\Authenticate::class,

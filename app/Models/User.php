@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ * @method static findOrFail($filter=[]) static
+ */
 class User extends Authenticatable{
 
 	use Notifiable;

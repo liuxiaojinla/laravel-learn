@@ -2,26 +2,33 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Foundation\Events\Dispatchable;
+use App\Concerns\ConstProperty;
+use App\Models\User as UserModel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
-class Login
-{
+/**
+ * Class Login
+ *
+ * @property-read UserModel $user
+ */
+class Login{
+
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    use ConstProperty;
 
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param \App\Models\User $user
      */
-    public function __construct()
-    {
-        //
+    public function __construct(UserModel $user){
+        $this->initializeConstProperty([
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -29,8 +36,7 @@ class Login
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
-    {
+    public function broadcastOn(){
         return new PrivateChannel('channel-name');
     }
 }
