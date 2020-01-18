@@ -14,15 +14,17 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'PostsController@index')->name('home');
+Route::get('/', 'PostController@index')->name('home');
 
 Auth::routes();
 
 // 博客文章
-Route::get('posts', 'PostsController@index');
-Route::get('posts/{id}', 'PostsController@show');
+Route::get('posts', 'PostController@index');
+Route::get('posts/{id}', 'PostController@show');
 
 // 博客分类
+Route::get('categories', 'CategoryController@index');
+Route::get('categories/{id}', 'CategoryController@show');
 
 // 个人中心
 Route::name('user.')

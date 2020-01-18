@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 
-class Controller extends BaseController{
+class HomeController extends BaseController{
 
     /**
      * Create a new controller instance.
@@ -22,9 +22,8 @@ class Controller extends BaseController{
      */
     public function index(){
         $data = Post::latest()->paginate(15);
-        return $this->setMeta('首页')->fetch('index.index', [
+        return $this->setMeta('首页')->make('index.index', [
             'data' => $data,
         ]);
-        //		return view('home');
     }
 }

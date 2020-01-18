@@ -19,6 +19,7 @@ interface LoginInterface{
      * @param mixed $pwd
      * @param int   $type
      * @return User
+     * @throws \App\Contracts\LoginException
      */
     public function login($user, $pwd, $type = 0);
 

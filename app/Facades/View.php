@@ -18,7 +18,7 @@ class View extends BaseViewFacade{
      * @param string $title
      * @param string $description
      * @param string $keywords
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\View\Factory
      */
     public static function setMeta($title, $description = null, $keywords = null){
         View::share([

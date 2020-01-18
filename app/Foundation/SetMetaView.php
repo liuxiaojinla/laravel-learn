@@ -10,8 +10,14 @@ namespace App\Foundation;
 
 use App\Facades\View;
 
-trait MetaView{
+trait SetMetaView{
 
+    /**
+     * @param string $title
+     * @param null   $description
+     * @param null   $keywords
+     * @return \Illuminate\View\Factory
+     */
     protected function setMeta($title, $description = null, $keywords = null){
         return View::setMeta($title, $description, $keywords);
     }
