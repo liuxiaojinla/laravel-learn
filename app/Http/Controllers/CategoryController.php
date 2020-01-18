@@ -23,10 +23,13 @@ class CategoryController extends BaseController{
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index(){
-        //
+        $data = Category::latest()->paginate(15);
+        return $this->setMeta('专题列表')->make('category.index', [
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -39,7 +42,7 @@ class CategoryController extends BaseController{
         /** @var Category $info */
         $info = Category::findOrFail($id);
 
-        return $this->setMeta($info->title)->make('index.info', [
+        return $this->setMeta($info->title)->make('category.info', [
             'info' => $info,
         ]);
     }
