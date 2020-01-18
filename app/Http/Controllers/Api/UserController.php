@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Foundation\Hint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -16,11 +17,12 @@ class UserController extends BaseController{
     /**
      * 用户列表
      *
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function index(){
         //		$data = DB::select('select * from la_users limit 0,100');
         $data = DB::table('users')->paginate(20);
+        Hint::success($data);
         return $data;
     }
 

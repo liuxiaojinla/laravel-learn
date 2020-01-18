@@ -8,12 +8,44 @@
 
 namespace App\Foundation;
 
+use App\Exceptions\HttpJumpException;
+
 final class Hint{
 
-    public static function error(){
+    /**
+     * @param string $msg
+     * @param int    $code
+     * @param mixed  $data
+     * @param array  $extend
+     * @throws \App\Exceptions\HttpJumpException
+     */
+    public static function error($msg, $code = 0, $data = [], $extend = []){
+        throw self::make($msg, $code, $data, $extend);
     }
 
-    public static function success(){
+    /**
+     * @param string $msg
+     * @param mixed  $data
+     * @param array  $extend
+     * @throws \App\Exceptions\HttpJumpException
+     */
+    public static function success($data, $msg = 'ok', $extend = []){
+        throw self::make($msg, 1, $data, $extend);
+    }
+
+    /**
+     * @param string $msg
+     * @param int    $code
+     * @param array  $data
+     * @param array  $extend
+     * @return \App\Exceptions\HttpJumpException
+     */
+    private static function make($msg, $code = 0, $data = [], $extend = []){
+        $e = new HttpJumpException($msg, $code);
+        $e->setData(array_merge([
+            'data' => $data,
+        ], $extend));
+        return $e;
     }
 
 }

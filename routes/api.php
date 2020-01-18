@@ -21,7 +21,5 @@ Route::middleware('auth:api')->get('/user', function(Request $request){
 Route::group([
 	'prefix' => '/users',
 ], function(){
-	Route::get('/', 'UsersController@index')->name('lists');
-	Route::get('builds', 'UsersController@builds')->name('builds');
-	Route::get('{id}', 'UsersController@show')->name('profile');
+	Route::get('/', 'UserController@index')->name('lists');
 });

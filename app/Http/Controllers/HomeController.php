@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Foundation\Hint;
 use App\Models\Post;
 
 class HomeController extends BaseController{
