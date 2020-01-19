@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('home.layouts.app')
 
 @section('content')
 
@@ -10,7 +10,7 @@
 	])
 	@endcomponent
 
-	@each('index.tpl_post_list_item',$data,'item','index.tpl_post_list_empty')
+	@each('home.index.tpl_post_list_item',$data,'item','home.index.tpl_post_list_empty')
 	{{ $data->links() }}
 
 @endsection

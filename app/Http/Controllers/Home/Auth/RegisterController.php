@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Home\Auth;
 
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Home\BaseController;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +38,6 @@ class RegisterController extends BaseController{
      */
     public function __construct(){
         $this->middleware('guest');
-        $this->setMeta('注册');
     }
 
     /**

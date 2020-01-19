@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Home\Auth;
 
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Home\BaseController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends BaseController{
@@ -39,7 +39,6 @@ class LoginController extends BaseController{
     }
 
     public function showLoginForm(){
-        $this->setMeta('登录');
         return $this->_showLoginForm();
     }
 }

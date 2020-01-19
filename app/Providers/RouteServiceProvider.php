@@ -13,7 +13,7 @@ class RouteServiceProvider extends ServiceProvider{
      *
      * @var string
      */
-    protected $namespace = 'App\Http\Controllers';
+    protected $namespace = 'App\Http\Controllers\Home';
 
     /**
      * This namespace is applied to your controller routes.
@@ -52,11 +52,11 @@ class RouteServiceProvider extends ServiceProvider{
         //Api 路由
         $this->mapApiRoutes();
 
-        // PC端路由
-        $this->mapWebRoutes();
-
         // 注册后台路由
         $this->mapAdminRoutes();
+
+        // PC端路由
+        $this->mapWebRoutes();
     }
 
     /**
@@ -73,6 +73,19 @@ class RouteServiceProvider extends ServiceProvider{
     }
 
     /**
+     * Define the "admin" routes for the application.
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapAdminRoutes(){
+        Route::prefix('admin')
+            ->middleware('admin')
+            ->namespace($this->adminNamespace)
+            ->group(base_path('routes/admin.php'));
+    }
+
+    /**
      * Define the "web" routes for the application.
      * These routes all receive session state, CSRF protection, etc.
      *
@@ -84,15 +97,4 @@ class RouteServiceProvider extends ServiceProvider{
             ->group(base_path('routes/web.php'));
     }
 
-    /**
-     * Define the "admin" routes for the application.
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapAdminRoutes(){
-        Route::middleware('admin')
-            ->namespace($this->adminNamespace)
-            ->group(base_path('routes/admin.php'));
-    }
 }

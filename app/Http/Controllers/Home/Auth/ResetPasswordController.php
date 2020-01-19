@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Home\Auth;
 
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Home\BaseController;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends BaseController{
@@ -34,6 +34,5 @@ class ResetPasswordController extends BaseController{
      */
     public function __construct(){
         $this->middleware('guest');
-        $this->setMeta('重置密码');
     }
 }

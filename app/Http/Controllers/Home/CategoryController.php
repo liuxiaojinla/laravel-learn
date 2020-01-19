@@ -6,19 +6,14 @@
  * @date: 2019/7/15 11:01
  */
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Home;
 
-use App\Http\Controllers\BaseController;
 use App\Models\Category;
 
+/**
+ * Class CategoryController
+ */
 class CategoryController extends BaseController{
-
-    /**
-     * PostsController constructor.
-     */
-    public function __construct(){
-        $this->middleware('auth');
-    }
 
     /**
      * Display a listing of the resource.
@@ -27,7 +22,7 @@ class CategoryController extends BaseController{
      */
     public function index(){
         $data = Category::latest()->paginate(15);
-        return $this->setMeta('专题列表')->make('category.index', [
+        return view('category.index', [
             'data' => $data,
         ]);
     }
@@ -42,7 +37,7 @@ class CategoryController extends BaseController{
         /** @var Category $info */
         $info = Category::findOrFail($id);
 
-        return $this->setMeta($info->title)->make('category.info', [
+        return view('category.info', [
             'info' => $info,
         ]);
     }

@@ -21,7 +21,7 @@
 </head>
 <body>
 <div id="app">
-	@include('includes.app_header')
+	@include('home.layouts.app_header')
 
 	<main class="container py-4">
 		@section('container')
@@ -30,7 +30,7 @@
 				@section('aside-container')
 					<div class="app-aside">
 						@section('aside')
-							@include('includes.app_aside')
+							@include('home.layouts.app_aside')
 						@show
 					</div>
 				@show
@@ -42,7 +42,7 @@
 				@section('additional-container')
 					<div class="app-additional">
 						@section('additional')
-							@include('includes.app_additional')
+							@include('home.layouts.app_additional')
 						@show
 					</div>
 				@show

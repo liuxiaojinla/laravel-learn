@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
-use App\Foundation\Hint;
 use App\Models\Post;
 
+/**
+ * Class HomeController
+ */
 class HomeController extends BaseController{
 
     /**
@@ -14,7 +16,7 @@ class HomeController extends BaseController{
      */
     public function index(){
         $data = Post::latest()->paginate(15);
-        return $this->setMeta('首页')->make('index.index', [
+        return view('home.index.index', [
             'data' => $data,
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
 use App\Models\Post;
 
@@ -13,7 +13,7 @@ class PostController extends BaseController{
      */
     public function index(){
         $data = Post::latest()->paginate(15);
-        return $this->setMeta('首页')->make('index.index', [
+        return view('index.index', [
             'data' => $data,
         ]);
     }
@@ -28,7 +28,7 @@ class PostController extends BaseController{
         /** @var Post $info */
         $info = Post::findOrFail($id);
         $info->increment('view_count');
-        return $this->setMeta($info->title)->make('index.info', [
+        return view('index.info', [
             'info' => $info,
         ]);
     }

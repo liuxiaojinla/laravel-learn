@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Home\Auth;
 
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Home\BaseController;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends BaseController{
@@ -27,7 +27,5 @@ class ForgotPasswordController extends BaseController{
      */
     public function __construct(){
         $this->middleware('guest');
-
-        $this->setMeta('忘记密码');
     }
 }
