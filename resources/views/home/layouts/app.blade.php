@@ -21,7 +21,7 @@
 </head>
 <body>
 <div id="app">
-	@include('home.layouts.app_header')
+	@include('home.layouts.header')
 
 	<main class="container py-4">
 		@section('container')
@@ -30,19 +30,19 @@
 				@section('aside-container')
 					<div class="app-aside">
 						@section('aside')
-							@include('home.layouts.app_aside')
+							@include('home.layouts.aside')
 						@show
 					</div>
 				@show
 
-				<div class="col-sm">
+				<div class="col-md">
 					@yield('content')
 				</div>
 
 				@section('additional-container')
 					<div class="app-additional">
 						@section('additional')
-							@include('home.layouts.app_additional')
+							@include('home.layouts.additional')
 						@show
 					</div>
 				@show

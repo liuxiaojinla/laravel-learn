@@ -10,7 +10,7 @@
 	])
 	@endcomponent
 
-	@each('home.index.tpl_post_list_item',$data,'item','home.index.tpl_post_list_empty')
+	@each('home.post.tpl_post_list_item',$data,'item','home.post.tpl_post_list_empty')
 	{{ $data->links() }}
 
 @endsection

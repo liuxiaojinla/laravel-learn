@@ -8,9 +8,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Foundation\SetMetaView;
+use Illuminate\Routing\Controller;
 
-class BaseController{
+class BaseController extends Controller{
 
-    use SetMetaView;
+    /**
+     * BaseController constructor.
+     */
+    public function __construct(){
+        $this->middleware('auth:admin');
+    }
 }

@@ -18,9 +18,7 @@ class LoginController extends BaseController{
     |
     */
 
-    use AuthenticatesUsers {
-        showLoginForm as protected _showLoginForm;
-    }
+    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -38,7 +36,12 @@ class LoginController extends BaseController{
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showLoginForm(){
-        return $this->_showLoginForm();
+        return view('home.auth.login');
     }
 }

@@ -13,7 +13,7 @@ class PostController extends BaseController{
      */
     public function index(){
         $data = Post::latest()->paginate(15);
-        return view('index.index', [
+        return view('home.post.index', [
             'data' => $data,
         ]);
     }
@@ -28,7 +28,7 @@ class PostController extends BaseController{
         /** @var Post $info */
         $info = Post::findOrFail($id);
         $info->increment('view_count');
-        return view('index.info', [
+        return view('home.post.info', [
             'info' => $info,
         ]);
     }

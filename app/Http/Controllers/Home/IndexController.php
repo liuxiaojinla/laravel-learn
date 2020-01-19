@@ -7,7 +7,7 @@ use App\Models\Post;
 /**
  * Class HomeController
  */
-class HomeController extends BaseController{
+class IndexController extends BaseController{
 
     /**
      * Show the application dashboard.
@@ -16,7 +16,7 @@ class HomeController extends BaseController{
      */
     public function index(){
         $data = Post::latest()->paginate(15);
-        return view('home.index.index', [
+        return view('home.post.index', [
             'data' => $data,
         ]);
     }

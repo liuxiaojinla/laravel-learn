@@ -14,7 +14,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'IndexController@index')->name('home');
 
 Auth::routes();
 
@@ -23,7 +23,7 @@ Route::get('posts', 'PostController@index');
 Route::get('posts/{id}', 'PostController@show');
 
 // 博客分类
-Route::get('categories', 'CategoryController@index');
+Route::get('categories', 'CategoryController@index')->name('categories');
 Route::get('categories/{id}', 'CategoryController@show');
 
 // 个人中心

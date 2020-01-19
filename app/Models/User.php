@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 /**
  * Class User
  * @method static findOrFail($filter=[]) static
+ * @method static create(array $data) static
  */
 class User extends Authenticatable{
 

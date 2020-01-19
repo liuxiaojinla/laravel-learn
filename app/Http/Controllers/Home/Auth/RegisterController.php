@@ -68,4 +68,13 @@ class RegisterController extends BaseController{
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showRegistrationForm(){
+        return view('home.auth.register');
+    }
 }

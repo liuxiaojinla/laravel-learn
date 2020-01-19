@@ -12,6 +12,6 @@ class UserController extends BaseController{
     public function show(){
         $uid = 1;
         $user = User::findOrFail($uid);
-        return view('user.profile', ['user' => $user]);
+        return view('home.user.profile', ['user' => $user]);
     }
 }

@@ -22,7 +22,7 @@ class CategoryController extends BaseController{
      */
     public function index(){
         $data = Category::latest()->paginate(15);
-        return view('category.index', [
+        return view('home.category.index', [
             'data' => $data,
         ]);
     }
