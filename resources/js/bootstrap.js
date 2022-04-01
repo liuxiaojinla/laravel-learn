@@ -1,57 +1,14 @@
 window._ = require('lodash');
 
 /**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
-try {
-	window.Popper = require('popper.js').default;
-	window.$ = window.jQuery = require('jquery');
-
-	require('bootstrap');
-} catch (e) {
-}
-
-window.editor = function(el, options = {}) {
-	return tinymce.init($.extend({
-		selector: el,
-		height: 500,
-		menubar: false,
-		plugins: [
-			'advlist autolink lists link image charmap print preview anchor textcolor',
-			'searchreplace visualblocks code fullscreen',
-			'insertdatetime media table paste code help wordcount'
-		],
-		toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-		language: 'zh_CN',//语言包的路径
-		// content_css: [
-		// 	'//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-		// 	'//www.tiny.cloud/css/codepen.min.css'
-		// ]
-	}, options));
-};
-
-/**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
+
 window.axios = require('axios');
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-/**
- * Next we will register the CSRF Token as a common header with Axios so that
- * all outgoing HTTP requests automatically have it attached. This is just
- * a simple convenience so we don't have to attach every token manually.
- */
-
-let token = document.head.querySelector('meta[name="csrf-token"]');
-if (token) {
-	window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-	console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -59,7 +16,7 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo'
+// import Echo from 'laravel-echo';
 
 // window.Pusher = require('pusher-js');
 
@@ -67,5 +24,5 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: process.env.MIX_PUSHER_APP_KEY,
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
+//     forceTLS: true
 // });

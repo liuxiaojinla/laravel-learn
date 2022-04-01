@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function(Request $request){
-	return $request->user();
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/success', [HomeController::class, 'showSuccess']);
+Route::get('/error', [HomeController::class, 'showError']);
+Route::get('/repository/{action}', \App\Http\Controllers\Testing\RepositoryController::class);
+Route::get('/canvas/{action}', \App\Http\Controllers\Testing\CanvasController::class);
 
-Route::group([
-	'prefix' => '/users',
-], function(){
-	Route::get('/', 'UserController@index')->name('lists');
-});
+Route::prefix('order')->group(base_path('routes/apis/order.php'));
+
+Route::prefix('user')
+    ->middleware('auth')
+    ->group(base_path('routes/apis/user.php'));
+
+Route::prefix('config')
+    ->group(base_path('routes/apis/config.php'));

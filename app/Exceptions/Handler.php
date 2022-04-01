@@ -2,13 +2,15 @@
 
 namespace App\Exceptions;
 
-use Exception;
+use App\Support\Facades\Hint;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
+use Throwable;
 
-class Handler extends ExceptionHandler{
-
+class Handler extends ExceptionHandler
+{
     /**
      * A list of the exception types that are not reported.
      *
@@ -24,65 +26,83 @@ class Handler extends ExceptionHandler{
      * @var array
      */
     protected $dontFlash = [
+        'current_password',
         'password',
         'password_confirmation',
     ];
 
     /**
-     * Report or log an exception.
+     * Register the exception handling callbacks for the application.
      *
-     * @param \Exception $exception
-     * @throws \Exception
+     * @return void
      */
-    public function report(Exception $exception){
-        parent::report($exception);
+    public function register()
+    {
+        $this->reportable(function (Throwable $e) {
+            //
+        });
     }
 
     /**
-     * Render an exception into an HTTP response.
+     * Determine if the exception handler response should be JSON.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Exception               $e
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @param \Throwable $e
+     * @return bool
      */
-    public function render($request, Exception $e){
-        if($e instanceof HttpJumpException){
-            return $this->httpJumpHandle($request, $e);
-        }
-
-        return parent::render($request, $e);
+    protected function shouldReturnJson($request, Throwable $e)
+    {
+        return $request->expectsJson() || !$request->is('web/*');
     }
 
     /**
-     * 跳转异常处理
+     * Convert a validation exception into a JSON response.
      *
-     * @param \Illuminate\Http\Request          $request
-     * @param \App\Exceptions\HttpJumpException $e
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Validation\ValidationException $exception
+     * @return \Illuminate\Http\Response
      */
-    private function httpJumpHandle(Request $request, HttpJumpException $e){
-        $baseData = [
-            'msg'  => $e->getMessage(),
-            'code' => $e->getCode(),
-        ];
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        return Hint::error($exception->getMessage(), $exception->status)->setStatusCode($exception->status);
+    }
 
-        $isApi = $request->route()->computedMiddleware;
-        if($request->ajax() || ($isApi && isset($isApi[0]) && $isApi[0] == 'api')){
-            $data = &$e->getData();
-            if($data['data'] instanceof LengthAwarePaginator){
-                $paginator = $data['data'];
-                $data = array_merge($data, $paginator->toArray());
-            }
-            return response()->json(array_merge($baseData, $data));
-        }elseif($request->has('_jsonp')){
-            $data = &$e->getData();
-            if($data['data'] instanceof LengthAwarePaginator){
-                $paginator = $data['data'];
-                $data = array_merge($data, $paginator->toArray());
-            }
-            return response()->jsonp($request->query('_jsonp'), array_merge($baseData, $e->getData()));
-        }else{
-            return view('layouts.jump', $baseData);
-        }
+    /**
+     * Convert the given exception to an array.
+     *
+     * @param \Throwable $e
+     * @return array
+     */
+    protected function convertExceptionToArray(Throwable $e)
+    {
+        $message = config('app.debug') || $this->isHttpException($e) ? $e->getMessage() : 'Server Error';
+        $extend = config('app.debug')
+            ? [
+                'message' => $e->getMessage(),
+                'exception' => get_class($e),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => collect($e->getTrace())->map(function ($trace) {
+                    return Arr::except($trace, ['args']);
+                })->all(),
+            ] : [];
+
+        return Hint::error($message, 500, [], $extend)->getOriginalContent();
+    }
+
+    /**
+     * Convert an authentication exception into a response.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Auth\AuthenticationException $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return $this->shouldReturnJson($request, $exception)
+            ? Hint::error($exception->getMessage(), -1, [
+                'url' => $exception->redirectTo(),
+            ])->setStatusCode(401)
+            : redirect()->guest($exception->redirectTo() ?? route('login'));
     }
 }

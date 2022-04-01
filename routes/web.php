@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Web\HomeController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,29 +15,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/', 'IndexController@index')->name('home');
+// Route::redirect('/', 'app/article');
 
-Auth::routes();
+Route::get('WW_verify_{code}', function ($code) {
+    return $code;
+});
 
-// 博客文章
-Route::get('posts', 'PostController@index');
-Route::get('posts/{id}', 'PostController@show');
+// Route::fallback(function () {
+//     return redirect('/');
+// });
 
-// 博客分类
-Route::get('categories', 'CategoryController@index')->name('categories');
-Route::get('categories/{id}', 'CategoryController@show');
-
-// 个人中心
-Route::name('user.')
-    ->prefix('user')
-    //    ->namespace('\App\Http\Controllers\User')
-    //    ->group(base_path('routes/web/user.php'))
-    ->group(function(){
-        Route::get('index', 'UserController@show');
-        Route::get('collect/categories', 'CategoryController@myCollect');
-        Route::get('collect/posts', 'PostController@myCollect');
-    });
+Route::middleware(['auth'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

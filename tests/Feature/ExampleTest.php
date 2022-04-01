@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Jobs\TestJob;
+use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ExampleTest extends TestCase
 {
@@ -12,10 +13,18 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testBasicTest()
+    public function test_example()
     {
-        $response = $this->get('/');
+        // $response = $this->get('/');
+        //
+        // $response->assertStatus(200);
 
-        $response->assertStatus(200);
+        Queue::fake();
+
+        Queue::assertNothingPushed();
+
+        Queue::push(TestJob::class, '122222');
+
+        Queue::assertPushedOn(null, TestJob::class);
     }
 }

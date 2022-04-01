@@ -2,99 +2,141 @@
 
 namespace App\Providers;
 
+use App\Services\Module\ModuleManager;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
-class RouteServiceProvider extends ServiceProvider{
-
+class RouteServiceProvider extends ServiceProvider
+{
     /**
-     * This namespace is applied to your controller routes.
-     * In addition, it is set as the URL generator's root namespace.
+     * The path to the "home" route for your application.
+     *
+     * This is used by Laravel authentication to redirect users after login.
      *
      * @var string
      */
-    protected $namespace = 'App\Http\Controllers\Home';
+    public const HOME = '/dashboard';
 
     /**
-     * This namespace is applied to your controller routes.
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
+     * @var ModuleManager
      */
-    protected $apiNamespace = 'App\Http\Controllers\Api';
+    protected $module;
 
     /**
-     * This namespace is applied to your controller routes.
-     * In addition, it is set as the URL generator's root namespace.
+     * The controller namespace for the application.
      *
-     * @var string
+     * When present, controller route declarations will automatically be prefixed with this namespace.
+     *
+     * @var string|null
      */
-    protected $adminNamespace = 'App\Http\Controllers\Admin';
+    // protected $namespace = 'App\\Http\\Controllers';
+
+    public function register()
+    {
+        parent::register();
+
+        $this->module = new ModuleManager(
+            config('module')
+        );
+
+        $this->app->instance('module', $this->module);
+        $this->app->alias('module', ModuleManager::class);
+    }
 
     /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
      */
-    public function boot(){
-        // 定义全局变量规则
-        Route::pattern('id', '[0-9]+');
+    public function boot()
+    {
+        $this->configureRateLimiting();
 
-        parent::boot();
+        $this->module->parse(
+            $this->app['request']->path(),
+            $this->app['request']
+        );
+
+        $this->routes(function (Request $request) {
+            $module = $request->module();
+
+            if ('api' === $module) {
+                $this->mapApiRoutes();
+            } elseif ('notify' === $module) {
+                $this->mapNotifyRoutes();
+            } elseif ('web' === $module) {
+                $this->mapWebRoutes();
+            } elseif ('auth' === $module) {
+                $this->mapAuthRoutes();
+            }
+
+            if (app()->environment('local') && file_exists(base_path('routes/local.php'))) {
+                Route::prefix('local')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/local.php'));
+            }
+        });
     }
 
     /**
-     * Define the routes for the application.
-     *
+     * 映射授权相关路由
      * @return void
      */
-    public function map(){
-        //Api 路由
-        $this->mapApiRoutes();
-
-        // 注册后台路由
-        $this->mapAdminRoutes();
-
-        // PC端路由
-        $this->mapWebRoutes();
+    protected function mapAuthRoutes()
+    {
+        Route::prefix('auth')
+            ->middleware('oauth')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/auth.php'));
     }
 
     /**
-     * Define the "api" routes for the application.
-     * These routes are typically stateless.
-     *
+     * 映射API模块相关路由
      * @return void
      */
-    protected function mapApiRoutes(){
+    protected function mapApiRoutes()
+    {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace($this->apiNamespace)
+            ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
     }
 
     /**
-     * Define the "admin" routes for the application.
-     * These routes all receive session state, CSRF protection, etc.
-     *
+     * 映射PC端相关路由
      * @return void
      */
-    protected function mapAdminRoutes(){
-        Route::prefix('admin')
-            ->middleware('admin')
-            ->namespace($this->adminNamespace)
-            ->group(base_path('routes/admin.php'));
-    }
-
-    /**
-     * Define the "web" routes for the application.
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapWebRoutes(){
+    protected function mapWebRoutes()
+    {
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
     }
 
+    /**
+     * 映射三方平台回调相关路由
+     * @return void
+     */
+    protected function mapNotifyRoutes()
+    {
+        Route::prefix('notify')
+            ->middleware('notify')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/notify.php'));
+    }
+
+    /**
+     * Configure the rate limiters for the application.
+     *
+     * @return void
+     */
+    protected function configureRateLimiting()
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        });
+    }
 }

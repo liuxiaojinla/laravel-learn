@@ -1,7 +1,3 @@
-<div class="alert alert-{{ $scene??'danger' }}">
-	@isset($title)
-		<div class="alert-title">{{ $title }}</div>
-	@endisset
-
-	{!! $slot !!}
+<div>
+    <!-- When there is no desire, all things are at peace. - Laozi -->
 </div>
