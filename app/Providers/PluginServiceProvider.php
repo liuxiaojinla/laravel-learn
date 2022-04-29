@@ -56,18 +56,16 @@ class PluginServiceProvider extends ServiceProvider
                 return;
             }
 
-            $plugin = $this->pluginManager->current();
-
-            $this->loadRoutes($request->module(), $plugin);
-
-            // if ($this->routesAreCached()) {
-            //     $this->loadCachedRoutes();
-            // } else {
-            //     $this->app->booted(function () {
-            //         $this->app['router']->getRoutes()->refreshNameLookups();
-            //         $this->app['router']->getRoutes()->refreshActionLookups();
-            //     });
-            // }
+            // 路由是否缓存
+            if ($this->app->routesAreCached()) {
+                $this->app->booted(function () use ($request) {
+                    $plugin = $this->pluginManager->current();
+                    $this->loadRoutes($request->module(), $plugin);
+                });
+            } else {
+                $plugin = $this->pluginManager->current();
+                $this->loadRoutes($request->module(), $plugin);
+            }
         });
 
         $this->initListeners();
