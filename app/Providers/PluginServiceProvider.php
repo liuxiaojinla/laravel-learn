@@ -40,6 +40,47 @@ class PluginServiceProvider extends ServiceProvider
     }
 
     /**
+     * Get the factory name for the given model name.
+     *
+     * @return void
+     */
+    public function registerFactoryResolvers()
+    {
+        Factory::guessFactoryNamesUsing(function ($modelName) {
+            $factoryNamespace = 'Database\\Factories\\';
+            $appNamespace = $this->app->getNamespace();
+
+            $modelName = Str::startsWith($modelName, $appNamespace . 'Models\\')
+                ? Str::after($modelName, $appNamespace . 'Models\\')
+                : Str::after($modelName, $appNamespace);
+
+            $class = $factoryNamespace . $modelName . 'Factory';
+
+            if (!class_exists($class) && Str::startsWith($modelName, $this->pluginManager->getNamespace())) {
+                $modelClass = Str::after($modelName, substr($modelName, 0, strpos($modelName, 'Models\\') + 7));
+                $pluginNamespace = substr($modelName, 0, strpos($modelName, 'Models\\'));
+                $class = $pluginNamespace . $factoryNamespace . $modelClass . 'Factory';
+            }
+
+            return $class;
+        });
+
+        Factory::guessModelNamesUsing(function (Factory $factory) {
+            $factoryClassname = get_class($factory);
+            if (Str::startsWith($factoryClassname, $this->pluginManager->getNamespace())) {
+                return Str::replaceFirst("Database\\Factories\\", "Models\\", Str::replaceLast('Factory', '', $factoryClassname));
+            }
+
+            $factoryBasename = Str::replaceLast('Factory', '', class_basename($factory));
+            $appNamespace = $this->app->getNamespace();
+
+            return class_exists($appNamespace . 'Models\\' . $factoryBasename)
+                ? $appNamespace . 'Models\\' . $factoryBasename
+                : $appNamespace . $factoryBasename;
+        });
+    }
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
@@ -52,18 +93,20 @@ class PluginServiceProvider extends ServiceProvider
         $this->registerRequestMacros();
 
         $this->booted(function (Request $request) {
+            $this->app->booted(function () {
+                // dd(Route::getRoutes());
+            });
             if (!$request->plugin()) {
                 return;
             }
 
             // 路由是否缓存
+            $plugin = $this->pluginManager->current();
             if ($this->app->routesAreCached()) {
-                $this->app->booted(function () use ($request) {
-                    $plugin = $this->pluginManager->current();
+                $this->app->booted(function () use ($request, $plugin) {
                     $this->loadRoutes($request->module(), $plugin);
                 });
             } else {
-                $plugin = $this->pluginManager->current();
                 $this->loadRoutes($request->module(), $plugin);
             }
         });
@@ -158,47 +201,6 @@ class PluginServiceProvider extends ServiceProvider
                 $tasks = $plugin->getTasks();
                 // todo
             }
-        });
-    }
-
-    /**
-     * Get the factory name for the given model name.
-     *
-     * @return void
-     */
-    public function registerFactoryResolvers()
-    {
-        Factory::guessFactoryNamesUsing(function ($modelName) {
-            $factoryNamespace = 'Database\\Factories\\';
-            $appNamespace = $this->app->getNamespace();
-
-            $modelName = Str::startsWith($modelName, $appNamespace . 'Models\\')
-                ? Str::after($modelName, $appNamespace . 'Models\\')
-                : Str::after($modelName, $appNamespace);
-
-            $class = $factoryNamespace . $modelName . 'Factory';
-
-            if (!class_exists($class) && Str::startsWith($modelName, $this->pluginManager->getNamespace())) {
-                $modelClass = Str::after($modelName, substr($modelName, 0, strpos($modelName, 'Models\\') + 7));
-                $pluginNamespace = substr($modelName, 0, strpos($modelName, 'Models\\'));
-                $class = $pluginNamespace . $factoryNamespace . $modelClass . 'Factory';
-            }
-
-            return $class;
-        });
-
-        Factory::guessModelNamesUsing(function (Factory $factory) {
-            $factoryClassname = get_class($factory);
-            if (Str::startsWith($factoryClassname, $this->pluginManager->getNamespace())) {
-                return Str::replaceFirst("Database\\Factories\\", "Models\\", Str::replaceLast('Factory', '', $factoryClassname));
-            }
-
-            $factoryBasename = Str::replaceLast('Factory', '', class_basename($factory));
-            $appNamespace = $this->app->getNamespace();
-
-            return class_exists($appNamespace . 'Models\\' . $factoryBasename)
-                ? $appNamespace . 'Models\\' . $factoryBasename
-                : $appNamespace . $factoryBasename;
         });
     }
 }

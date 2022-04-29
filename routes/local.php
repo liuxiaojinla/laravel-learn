@@ -1,6 +1,5 @@
 <?php
 
-use EasyWeChat\Kernel\Support\XML;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/111', function () {

@@ -18,9 +18,7 @@ class HintServiceProvider extends ServiceProvider
         $this->app->singleton(HintManager::class, function ($app) {
             return new HintManager(config('hint') ?: []);
         });
-
         $this->app->alias(HintManager::class, 'hint');
-
         $this->app->alias(HintManager::class, HintFactory::class);
 
         $this->app->singleton('hint.driver', function ($app) {

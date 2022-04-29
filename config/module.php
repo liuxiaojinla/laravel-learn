@@ -5,7 +5,7 @@ return [
     ],
 
     'white_list' => [
-        'api', 'admin', 'store',
+        'web', 'api', 'admin', 'store',
         'auth', 'notify',
     ],
 ];

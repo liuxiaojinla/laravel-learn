@@ -64,7 +64,8 @@ class Handler extends ExceptionHandler
      */
     protected function invalidJson($request, ValidationException $exception)
     {
-        return Hint::error($exception->getMessage(), $exception->status)->setStatusCode($exception->status);
+        return Hint::error($exception->getMessage(), $exception->status)
+            ->setStatusCode($exception->status);
     }
 
     /**

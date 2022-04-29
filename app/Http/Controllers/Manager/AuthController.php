@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Exceptions\ValidationException;
 use App\Models\Wechat\WechatWorkUser;
 use App\Services\Wechat\WechatResult;
-use App\Support\WeWork;
+use App\Support\Facades\Hint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     /**
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      * @throws \App\Exceptions\ValidationException
      */
     public function login(Request $request)
@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         $accessToken = $user->createToken($deviceName);
 
-        return success(array_merge([
+        return Hint::result(array_merge([
             'user' => $user,
         ], $accessToken->toArray()));
     }

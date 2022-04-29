@@ -21,11 +21,13 @@ class BotServiceProvider extends ServiceProvider implements DeferrableProvider
         });
 
         $this->app->alias(
-            BotManager::class, BotFactory::class
+            BotManager::class,
+            BotFactory::class
         );
 
         $this->app->alias(
-            BotManager::class, 'bot'
+            BotManager::class,
+            'bot'
         );
     }
 

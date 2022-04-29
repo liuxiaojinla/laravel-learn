@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugins\hello;
+namespace Plugins\article;
 
 use App\Services\Plugin\AbstractPlugin;
 

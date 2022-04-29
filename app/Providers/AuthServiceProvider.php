@@ -11,10 +11,9 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * The policy mappings for the application.
      *
-     * @var array<class-string, class-string>
+     * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -24,21 +23,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->initAuthentication();
-
         $this->registerPolicies();
-    }
 
-
-    /**
-     * @return void
-     */
-    protected function initAuthentication()
-    {
-        $this->app->booted(function () {
-            Config::set('sanctum.guard', \request()->module());
-        });
-
-        // Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+        //
     }
 }

@@ -6,16 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\RepositoryHandlers\GlobalMiddlewareHandler;
 use App\Http\RepositoryHandlers\MiddlewareHandler;
 use App\Models\User;
-use App\Repository\Repository;
+use App\Services\Repository\Repository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use function app;
-use function App\Http\Controllers\dd;
-use function dump;
-use function now;
 
 class RepositoryController extends Controller
 {

@@ -94,5 +94,4 @@ class CrawSiteCommand extends Command
             $this->error("The site \"{$site->host}\" failed the verification and has been disabled at " . now());
         }
     }
-
 }

@@ -61,7 +61,7 @@ class HintManager extends Manager implements HintFactory
     /**
      * @inerhitDoc
      */
-    protected function getDefaultDriver()
+    public function getDefaultDriver()
     {
         return $this->getConfig('defaults.hint', 'api');
     }
@@ -69,7 +69,7 @@ class HintManager extends Manager implements HintFactory
     /**
      * @inerhitDoc
      */
-    protected function setDefaultDriver($name)
+    public function setDefaultDriver($name)
     {
         $this->setConfig('defaults.hint', $name);
     }

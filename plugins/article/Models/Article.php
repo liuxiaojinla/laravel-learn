@@ -20,5 +20,4 @@ class Article extends Model
             'model' => static::class,
         ];
     }
-
 }

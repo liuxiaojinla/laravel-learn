@@ -36,9 +36,11 @@ class AppServiceProvider extends ServiceProvider
         //设置默认字符串长度
         Schema::defaultStringLength(191);
 
-        /** @var Generator $generator */
-        $generator = $this->app->make(Generator::class);
-        $generator->addProvider(new Text($generator));
+        if (class_exists(Generator::class)) {
+            /** @var Generator $generator */
+            $generator = $this->app->make(Generator::class);
+            $generator->addProvider(new Text($generator));
+        }
 
         $this->defineFilesystemAdapters();
     }

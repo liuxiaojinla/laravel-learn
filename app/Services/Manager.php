@@ -33,11 +33,10 @@ abstract class Manager
     /**
      * Create a new Service instance.
      * @param array $config
-     * @noinspection PhpMissingParamTypeInspection
      */
     public function __construct(array $config = [])
     {
-        $this->config = array_merge_recursive($this->config, $config);
+        $this->config = array_replace_recursive($this->config, $config);
     }
 
     /**

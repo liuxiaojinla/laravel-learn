@@ -209,6 +209,4 @@ class OptimizeURL
 
         return new static($urlInfo);
     }
-
-
 }

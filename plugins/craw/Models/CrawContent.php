@@ -10,5 +10,4 @@ class CrawContent extends Model
      * @var array
      */
     protected $guarded = [];
-
 }

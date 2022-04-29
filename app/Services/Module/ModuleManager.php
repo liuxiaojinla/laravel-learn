@@ -24,18 +24,18 @@ class ModuleManager extends Service
      */
     public function parse(string $requestPath)
     {
-        $module = $this->getDefaultModule();
+        $module = $this->getDefault();
         $modulePath = $requestPath;
 
         if ($index = strpos($requestPath, '/')) {
             $module = substr($requestPath, 0, $index);
-            if (in_array($module, $this->getWhiteModules())) {
+            if (in_array($module, $this->getWhiteList())) {
                 $modulePath = substr($requestPath, $index + 1);
             } else {
-                $module = $this->getDefaultModule();
+                $module = $this->getDefault();
             }
         } else {
-            if (in_array($requestPath, $this->getWhiteModules())) {
+            if (in_array($requestPath, $this->getWhiteList())) {
                 $module = $requestPath;
                 $modulePath = '';
             }
@@ -56,7 +56,7 @@ class ModuleManager extends Service
     protected function registerRequestMacros($module, $modulePath)
     {
         Request::macro('setPathInfo', function ($pathInfo) {
-            /** @var Request $this */
+            // /** @var Request $this */
             $this->pathInfo = $pathInfo;
         });
 
@@ -72,7 +72,7 @@ class ModuleManager extends Service
     /**
      * @return string
      */
-    public function getDefaultModule()
+    public function getDefault()
     {
         return $this->getConfig('defaults.module', 'web');
     }
@@ -80,8 +80,10 @@ class ModuleManager extends Service
     /**
      * @return array
      */
-    public function getWhiteModules()
+    public function getWhiteList()
     {
         return $this->getConfig('white_list', []);
     }
+
+
 }

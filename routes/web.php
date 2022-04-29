@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Web\HomeController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,22 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-Route::get('/', [HomeController::class, 'index']);
-
-// Route::redirect('/', 'app/article');
-
-Route::get('WW_verify_{code}', function ($code) {
-    return $code;
+Route::get('/', function () {
+    return "hello world";
 });
-
-// Route::fallback(function () {
-//     return redirect('/');
-// });
-
-Route::middleware(['auth'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
